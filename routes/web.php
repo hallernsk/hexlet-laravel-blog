@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('about', function () {
-    $tags = ['обучение', 'программирование', 'php', 'hexlet'];
-    return view('about', ['tags' => $tags]);
-});
+Route::get('about', [PageController::class, 'about']);
