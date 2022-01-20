@@ -44,7 +44,7 @@ class ArticleController extends Controller
         $article->fill($data);
         // При ошибках сохранения возникнет исключение
         $article->save();
-
+        flash('Cтатья добавлена в БД.');
         // Редирект на указанный маршрут
         return redirect()
             ->route('articles.index');
