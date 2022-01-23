@@ -40,3 +40,6 @@ Route::get('articles/{id}', [ArticleController::class, 'show'])
 // Метод PATCH
 Route::patch('articles/{id}', [ArticleController::class, 'update'])
     ->name('articles.update');
+
+Route::delete('articles/{id}', [ArticleController::class, 'destroy'])
+    ->name('articles.destroy');
