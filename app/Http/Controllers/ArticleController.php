@@ -25,6 +25,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
+        // dd('test-create-postman');
         $article = new Article();
         return view('article.create', compact('article'));
     }
@@ -37,10 +38,12 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $data = $this->validate($request, [
             'name' => 'required|unique:articles',
             'body' => 'required|min:10',
         ]);
+
 
         $article = new Article();
         // Заполнение статьи данными из формы
@@ -61,7 +64,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-//        $article = Article::findOrFail($id);
+        //        $article = Article::findOrFail($id);
         return view('article.show', compact('article'));
     }
 
@@ -73,7 +76,8 @@ class ArticleController extends Controller
      */
     public function edit(Article $article)
     {
- //       $article = Article::findOrFail($id);
+        // dd('test-edit-postman');
+        //       $article = Article::findOrFail($id);
         return view('article.edit', compact('article'));
     }
 
@@ -86,7 +90,8 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
- //       $article = Article::findOrFail($id);
+        // dd('test-update-postman');
+        //       $article = Article::findOrFail($id);
         $data = $this->validate($request, [
         // У обновления изменённая валидация: в проверку уникальности добавляется название поля и id текущего объекта
         // Если этого не сделать, Laravel будет ругаться на то что имя уже существует
@@ -109,7 +114,8 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
- //       $article = Article::find($id);
+        // dd('test-destroy-postman');
+        //       $article = Article::find($id);
         if ($article) {
             $article->delete();
         }
