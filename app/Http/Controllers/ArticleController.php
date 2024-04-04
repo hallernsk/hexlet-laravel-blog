@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ArticleResource;
 use App\Models\Article;
 use Illuminate\Http\Request;
 
@@ -15,6 +16,10 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::paginate();
+        // $articles = Article::all();
+
+        // return ArticleResource::collection($articles); // Возвращаем статьи в виде ресурсов (api) (Postman)
+
         return view('article.index', compact('articles'));
     }
 
@@ -44,11 +49,17 @@ class ArticleController extends Controller
             'body' => 'required|min:10',
         ]);
 
+        // dd($data);
+        // return ($data);
 
         $article = new Article();
+
         // Заполнение статьи данными из формы
         $article->fill($data);
         // При ошибках сохранения возникнет исключение
+
+        // return new ArticleResource($article); // Возвращаем статью в виде ресурса (api)
+
         $article->save();
         flash('Cтатья добавлена в БД.');
         // Редирект на указанный маршрут
@@ -64,7 +75,9 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
+        // dd('test-show-postman');
         //        $article = Article::findOrFail($id);
+        // return new ArticleResource($article);
         return view('article.show', compact('article'));
     }
 
