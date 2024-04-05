@@ -2,13 +2,21 @@
     <div>
         <ul>
             @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+                <li>
+                <span class="text-danger">{{ $error }}</span>
+                </li>
             @endforeach
         </ul>
     </div>
 @endif
 
-{{ Form::label('name', 'Название') }}
-{{ Form::text('name') }}<br>
+{{ Form::label('name', 'Название:') }}
+<br>
+{{ Form::text('name') }}
+<br><br>
 {{ Form::label('body', 'Содержание') }}
-{{ Form::textarea('body') }}<br>
+<br><br>
+{{ Form::textarea('body') }}
+<br>
+
+
