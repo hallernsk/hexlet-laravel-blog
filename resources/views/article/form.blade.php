@@ -10,12 +10,13 @@
     </div>
 @endif
 
+<br>
 {{ Form::label('name', 'Название:') }}
 <br>
 {{ Form::text('name') }}
 <br><br>
-{{ Form::label('body', 'Содержание') }}
-<br><br>
+{{ Form::label('body', 'Содержание:') }}
+<br>
 {{ Form::textarea('body') }}
 <br>
 
