@@ -43,14 +43,10 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
         $data = $this->validate($request, [
             'name' => 'required|unique:articles',
             'body' => 'required|min:10',
         ]);
-
-        // dd($data);
-        // return ($data);
 
         $article = new Article();
 
@@ -103,8 +99,6 @@ class ArticleController extends Controller
      */
     public function update(Request $request, Article $article)
     {
-        // dd('test-update-postman');
-        //       $article = Article::findOrFail($id);
         $data = $this->validate($request, [
         // У обновления изменённая валидация: в проверку уникальности добавляется название поля и id текущего объекта
         // Если этого не сделать, Laravel будет ругаться на то что имя уже существует
