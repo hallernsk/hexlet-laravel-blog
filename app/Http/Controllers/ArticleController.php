@@ -103,11 +103,12 @@ class ArticleController extends Controller
         // У обновления изменённая валидация: в проверку уникальности добавляется название поля и id текущего объекта
         // Если этого не сделать, Laravel будет ругаться на то что имя уже существует
             'name' => 'required|unique:articles,name,' . $article->id,
-            'body' => 'required|min:20',
+            'body' => 'required|min:10',
         ]);
 
-        $article->fill($data);
-        $article->save();
+        // $article->fill($data);  эти две строки
+        // $article->save();       можно заменить одной:
+        $article->update($data);
         flash('Cтатья обновлена.');
         return redirect()
             ->route('articles.index');
