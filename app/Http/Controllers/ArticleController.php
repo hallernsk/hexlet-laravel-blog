@@ -15,12 +15,12 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::paginate();
-        // $articles = Article::all();
+        // $articles = Article::paginate();
 
-        // return ArticleResource::collection($articles); // Возвращаем статьи в виде ресурсов (api) (Postman)
+        $articles = Article::all();
+        return ArticleResource::collection($articles); // Возвращаем статьи в виде ресурса (api) (Postman)
 
-        return view('article.index', compact('articles'));
+        // return view('article.index', compact('articles'));
     }
 
     /**
@@ -30,7 +30,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        // dd('test-create-postman');
+        // dd('test-create-for-postman');
         $article = new Article();
         return view('article.create', compact('article'));
     }
@@ -54,7 +54,7 @@ class ArticleController extends Controller
         $article->fill($data);
         // При ошибках сохранения возникнет исключение
 
-        // return new ArticleResource($article); // Возвращаем статью в виде ресурса (api)
+        return new ArticleResource($article); // Возвращаем созданную статью в виде ресурса (api)
 
         $article->save();
         flash('Cтатья добавлена в БД.');
@@ -71,10 +71,9 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        // dd('test-show-postman');
-        //        $article = Article::findOrFail($id);
-        // return new ArticleResource($article);
-        return view('article.show', compact('article'));
+        $article = Article::findOrFail($article->id);
+        return new ArticleResource($article);
+        // return view('article.show', compact('article'));
     }
 
     /**
@@ -87,6 +86,9 @@ class ArticleController extends Controller
     {
         // dd('test-edit-postman');
         //       $article = Article::findOrFail($id);
+
+        return new ArticleResource($article);
+
         return view('article.edit', compact('article'));
     }
 
@@ -122,12 +124,13 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        // dd('test-destroy-postman');
-        //       $article = Article::find($id);
+
         if ($article) {
             $article->delete();
         }
         flash('Cтатья удалена.');
+        return new ArticleResource($article);   // Возвращаем удаленную статью в виде ресурса (api)
+
         return redirect()->route('articles.index');
     }
 }
